@@ -1,10 +1,10 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const Axios = axios.create({
-  baseURL: "https://pre-onboarding-selection-task.shop/",
+  baseURL: 'https://pre-onboarding-selection-task.shop/',
   headers: {
-		"Content-Type": "application/json",
-	}
-})
+    'Content-Type': 'application/json',
+  },
+});
 
-export default Axios
+export default Axios;

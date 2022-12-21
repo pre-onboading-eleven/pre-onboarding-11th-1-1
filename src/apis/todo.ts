@@ -1,19 +1,19 @@
-import Axios from './main'
+import Axios from './main';
 
 const getTodos = () => {
   //
-}
+};
 
 const createTodo = () => {
   //
-}
+};
 
 const updateTodo = () => {
   //
-}
+};
 
 const deleteTodo = () => {
   //
-}
+};
 
-export {getTodos, createTodo, updateTodo, deleteTodo}
+export { getTodos, createTodo, updateTodo, deleteTodo };
