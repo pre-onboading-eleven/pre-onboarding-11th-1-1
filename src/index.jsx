@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
-import './index.css';
-import UserAuth from "./UserAuth";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+// import './index.css';
+import UserAuth from './UserAuth';
 import Todo from './Todo';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <UserAuth />,
   },
   {
-    path: "/todo",
+    path: '/todo',
     element: <Todo />,
   },
 ]);

@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import api from './api';
-
 
 const Container = styled.div`
   display: flex;
@@ -23,8 +22,8 @@ const Todoitem = styled.span`
 `;
 
 function Todo() {
-  const AUTHORIZATION = `Bearer ${localStorage.getItem("access_token")}`;
-  
+  const AUTHORIZATION = `Bearer ${localStorage.getItem('access_token')}`;
+
   const navigate = useNavigate();
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState('');
@@ -34,24 +33,24 @@ function Todo() {
 
   useEffect(() => {
     fetch(api.getTodos(), {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: AUTHORIZATION,
       },
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+      .then(res => res.json())
+      .then(data => {
+        // console.log(data);
         setTodos(data);
       });
   }, []);
 
   useEffect(() => {
-    const checkJwt = localStorage.getItem("access_token");
+    const checkJwt = localStorage.getItem('access_token');
 
     if (checkJwt === null) {
-      navigate("/");
+      navigate('/');
     }
   }, [navigate]);
 
@@ -61,21 +60,21 @@ function Todo() {
 
   function handleCreateTodo() {
     fetch(api.createTodo(), {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: AUTHORIZATION,
       },
-      body: JSON.stringify({todo: inputValue})
+      body: JSON.stringify({ todo: inputValue }),
     })
-      .then((res) => {
+      .then(res => {
         if (res.status === 201) {
           return res.json();
-        } 
+        }
       })
-      .then((data) => {
+      .then(data => {
         setTodos([...todos, data]);
-        console.log(todos)
+        // console.log(todos)
         setInputValue('');
       });
   }
@@ -84,30 +83,30 @@ function Todo() {
     setIsUpdate(false);
 
     fetch(api.deleteTodo(serverId), {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
         Authorization: AUTHORIZATION,
       },
-    }).then((res) => {
+    }).then(res => {
       // console.log(res);
       if (res.status === 204) {
         setTodos(todos.filter((item, idx) => idx !== arrayId));
-        alert("삭제 되었습니다")
+        alert('삭제 되었습니다');
       } else {
-        alert("삭제 되지 않았습니다.");
+        alert('삭제 되지 않았습니다.');
       }
     });
   }
 
   function handleUpdateValue(e, id) {
-    setUpdateValue(e.target.value)
+    setUpdateValue(e.target.value);
   }
-  
+
   function handleUpdateTodo(serverId, arrayId, isCompleted) {
     fetch(api.updateTodo(serverId), {
-      method: "PUT",
+      method: 'PUT',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: AUTHORIZATION,
       },
       body: JSON.stringify({
@@ -115,15 +114,15 @@ function Todo() {
         isCompleted: isCompleted,
       }),
     })
-      .then((res) => {
+      .then(res => {
         if (res.status === 200) {
           return res.json();
         }
       })
-      .then((data) => {
+      .then(data => {
         setTodos(todos.map((item, idx) => (idx === arrayId ? data : item)));
         setIsUpdate(false);
-        setUpdateValue('')
+        setUpdateValue('');
       });
   }
 
@@ -131,16 +130,8 @@ function Todo() {
     <Container>
       <div>
         <label htmlFor="create">추가</label>
-        <input
-          type="text"
-          name="create"
-          value={inputValue}
-          onChange={handleInput}
-        />
-        <button
-          type="button"
-          onClick={handleCreateTodo}
-        >
+        <input type="text" name="create" value={inputValue} onChange={handleInput} />
+        <button type="button" onClick={handleCreateTodo}>
           추가
         </button>
       </div>
@@ -151,24 +142,18 @@ function Todo() {
               <input
                 type="checkbox"
                 checked={item.isCompleted}
-                onChange={(e) =>
-                  handleUpdateTodo(item.id, idx, e.target.checked)
-                }
+                onChange={e => handleUpdateTodo(item.id, idx, e.target.checked)}
               />
-              <Completed>{item.isCompleted ? "완료" : "미완"}</Completed>
+              <Completed>{item.isCompleted ? '완료' : '미완'}</Completed>
               {isUpdate && idx === updateIdx ? (
                 <>
                   <input
                     type="text"
                     name="create"
                     value={updateValue}
-                    onChange={(e) => handleUpdateValue(e, item.id)}
+                    onChange={e => handleUpdateValue(e, item.id)}
                   />
-                  <button
-                    onClick={() =>
-                      handleUpdateTodo(item.id, idx, item.isCompleted)
-                    }
-                  >
+                  <button onClick={() => handleUpdateTodo(item.id, idx, item.isCompleted)}>
                     제출
                   </button>
                   <button onClick={() => setIsUpdate(false)}>수정취소</button>
@@ -184,9 +169,7 @@ function Todo() {
                   >
                     수정
                   </button>
-                  <button onClick={() => handleDeleteTodo(item.id, idx)}>
-                    삭제
-                  </button>
+                  <button onClick={() => handleDeleteTodo(item.id, idx)}>삭제</button>
                 </>
               )}
             </li>
@@ -194,8 +177,8 @@ function Todo() {
       </ol>
       <button
         onClick={() => {
-          localStorage.removeItem("access_token");
-          navigate("/");
+          localStorage.removeItem('access_token');
+          navigate('/');
         }}
       >
         로그아웃
@@ -204,4 +187,4 @@ function Todo() {
   );
 }
 
-export default Todo
+export default Todo;
