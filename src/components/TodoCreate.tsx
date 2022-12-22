@@ -1,4 +1,9 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+
+import Button from './common/Button';
+import InputField from './common/InputField';
+
 import { apis } from '../apis/api';
 
 interface TodoListItemProps {
@@ -6,7 +11,7 @@ interface TodoListItemProps {
 }
 
 const TodoCreate = ({ getTodo }: TodoListItemProps) => {
-  const [todoInput, setTodoInput] = React.useState('');
+  const [todoInput, setTodoInput] = useState('');
 
   const onCreateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodoInput(e.target.value);
@@ -32,14 +37,34 @@ const TodoCreate = ({ getTodo }: TodoListItemProps) => {
   };
 
   return (
-    <div>
-      <label htmlFor="create">추가</label>
-      <input type="text" name="create" value={todoInput} onChange={onCreateInput} />
-      <button type="button" onClick={onCreateTodo()}>
+    <TodoCreateWrapper>
+      <InputField
+        value={todoInput}
+        onChange={onCreateInput}
+        width="300px"
+        placeholder="추가할 Todo 작성해 주세요."
+      />
+      <Button bgColor="#003049" onClick={onCreateTodo()}>
         추가
-      </button>
-    </div>
+      </Button>
+    </TodoCreateWrapper>
   );
 };
+
+const TodoCreateWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-grow: 1;
+
+  border-radius: 20px;
+  padding: 20px;
+
+  label,
+  input {
+    margin-right: 10px;
+  }
+`;
 
 export default TodoCreate;
