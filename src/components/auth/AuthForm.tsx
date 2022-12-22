@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { apis } from '../apis/api';
+import { apis } from '../../apis/api';
 import Field from './AuthField';
 
 interface AuthFormProps {
