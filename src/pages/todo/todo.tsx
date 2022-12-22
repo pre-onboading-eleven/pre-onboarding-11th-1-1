@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { apis } from '../../apis/api';
 
+import TodoCreate from '../../components/TodoCreate';
 import TodoList from '../../components/TodoList';
 
 export interface TodoType {
@@ -15,34 +16,6 @@ export interface TodoType {
 const Todo = () => {
   const navigate = useNavigate();
   const [todos, setTodos] = useState([] as TodoType[]);
-  // const [inputValue, setInputValue] = useState('');
-
-  // const createTodo = text => {
-  //   apis.createTodo({
-  //     todo: text,
-  //   })
-  //     .then(res => {
-  //       setTodo(preTodos => [...preTodos, res.data]);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // const updateTodo = (id, todo, isCompleted) => {
-  //   Axios.put('/' + id, {
-  //     todo,
-  //     isCompleted,
-  //   })
-  //     .then(res => {
-  //       if (res.status === 200) {
-  //         getTodo();
-  //       }
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // };
 
   const getTodo = async () => {
     const { data } = await apis.getTodos();
@@ -63,16 +36,10 @@ const Todo = () => {
 
   return (
     <Container>
-      {/* <div>
-        <label htmlFor="create">추가</label>
-        <input type="text" name="create" value={inputValue} onChange={handleInput} />
-        <button type="button" onClick={handleCreateTodo}>
-          추가
-        </button>
-      </div> */}
+      <TodoCreate getTodo={getTodo} />
       <ol>
         {todos.length > 0 &&
-          todos.map(todo => <TodoList key={todo.id} todo={todo} getTodo={getTodo} />)}
+          todos.map(todo => <TodoList key={todo.id} todo={todo} getTodo={getTodo} />).reverse()}
       </ol>
       <button
         onClick={() => {
