@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { apis } from '../apis/api';
-import { TodoType } from '../pages/todo/todo';
+import { TodoType } from '../pages/todo/Todo';
 
 interface TodoListItemProps {
   todo: TodoType;
