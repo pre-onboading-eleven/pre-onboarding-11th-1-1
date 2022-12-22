@@ -1,9 +1,14 @@
 import React from 'react';
 // import styled from 'styled-components';
-// import { apis } from './apis/api';
+import { apis } from '../apis/api';
 import { TodoType } from '../pages/todo/Todo';
 
-const TodoList = ({ todo }: { todo: TodoType }) => {
+interface TodoListItemProps {
+  todo: TodoType;
+  getTodo: () => void;
+}
+
+const TodoList = ({ todo, getTodo }: TodoListItemProps) => {
   console.log(todo);
   // const [updateValue, setUpdateValue] = useState('');
   // const [isUpdate, setIsUpdate] = useState(false);
@@ -56,6 +61,63 @@ const TodoList = ({ todo }: { todo: TodoType }) => {
   //     });
   // }
 
+  // const onChange = e => {
+  //   setValue(e.target.value);
+  // };
+
+  // const onKeyUp = () => {
+  //   const keyCode = window.event.keyCode;
+
+  //   if (keyCode === 13) {
+  //     updateTodo();
+  //   }
+  // };
+
+  // const checkboxStatus = e => {
+  //   setCompleted(e.target.checked);
+  // };
+
+  // const onUpdateMode = () => {
+  //   setReadOnly(!readOnly);
+  //   setDisabled(!disabled);
+
+  //   setShowDefaultBtn(false);
+  //   setShowUpdateBtn(true);
+  // };
+
+  const deleteTodo = (id:number) => {
+    apis.deleteTodo(id)
+      .then(res => {
+        if (res.status === 204) {
+          getTodo();
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
+  // const updateTodo = () => {
+  //   if (value === '') {
+  //     alert('수정할 내용을 입력하세요');
+  //   } else {
+  //     onUpdateTodo(id, value, completed);
+  //     setReadOnly(!readOnly);
+  //     setDisabled(!disabled);
+  //     setShowDefaultBtn(true);
+  //     setShowUpdateBtn(false);
+  //   }
+  // };
+
+  // const cancleTodo = () => {
+  //   setValue(todo.todo);
+  //   setCompleted(todo.isCompleted);
+  //   setReadOnly(!readOnly);
+  //   setDisabled(!disabled);
+  //   setShowDefaultBtn(true);
+  //   setShowUpdateBtn(false);
+  // };
+
   return (
     <div className="todoListItem">
       <input
@@ -74,18 +136,10 @@ const TodoList = ({ todo }: { todo: TodoType }) => {
         // onChange={onChange}
         // onKeyUp={onKeyUp}
       ></input>
-      {/* <div className={'btn' + (showDefaultBtn ? ' isShow' : ' isHide')} onClick={onUpdateMode}>
-        수정
-      </div>
-      <div className={'btn' + (showDefaultBtn ? ' isShow' : ' isHide')} onClick={deleteTodo}>
-        삭제
-      </div>
-      <div className={'btn light' + (showUpdateBtn ? ' isShow' : ' isHide')} onClick={updateTodo}>
-        완료
-      </div>
-      <div className={'btn light' + (showUpdateBtn ? ' isShow' : ' isHide')} onClick={cancleTodo}>
-        취소
-      </div> */}
+      {/* <div onClick={onUpdateMode}>수정</div> */}
+      <button onClick={() => deleteTodo(todo.id)}>삭제</button>
+      {/* <div onClick={updateTodo}>완료</div>
+      <div onClick={cancleTodo}>취소</div> */}
     </div>
   );
 };
