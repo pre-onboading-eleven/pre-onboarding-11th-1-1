@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { apis } from '../../apis/api';
 
-import TodoCreate from '../../components/TodoCreate';
-import TodoList from '../../components/TodoList';
+import TodoCreate from '../../components/todo/TodoCreate';
+import TodoList from '../../components/todo/TodoList';
 import Button from '../../components/common/Button';
 
 export interface TodoType {

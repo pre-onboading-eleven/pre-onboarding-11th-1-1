@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import Button from './common/Button';
-import InputField from './common/InputField';
+import Button from '../common/Button';
+import InputField from '../common/InputField';
 
-import { apis } from '../apis/api';
+import { apis } from '../../apis/api';
 
 interface TodoListItemProps {
   getTodo(): Promise<void>;

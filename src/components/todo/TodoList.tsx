@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import Button from './common/Button';
-import InputField from './common/InputField';
+import Button from '../common/Button';
+import InputField from '../common/InputField';
 
-import { apis } from '../apis/api';
-import { TodoType } from '../pages/todo/todo';
+import { apis } from '../../apis/api';
+import { TodoType } from '../../pages/todo/todo';
 
 interface TodoListItemProps {
   todo: TodoType;
