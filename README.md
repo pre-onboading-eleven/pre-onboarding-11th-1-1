@@ -10,6 +10,13 @@
 
 동료 학습, 팀으로 일하는 법에 익숙해 지는 것
 
+## ⚡️ 프로젝트 실행 방법
+
+```
+npm install
+npm start
+```
+
 ## ✈️ 배포 링크
 
 https://pre-onboarding-11th-1-1.vercel.app/
@@ -292,10 +299,3 @@ api instance를 사용하여 코드의 재사용성을 높이고 api 로직을 �
 ## 💡 추가 구현 사항
 
 로그아웃, 에러 알럿
-
-## ⚡️ 프로젝트 실행 방법
-
-```
-npm install
-npm start
-```
