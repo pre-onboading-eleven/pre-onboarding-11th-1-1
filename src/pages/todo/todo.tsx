@@ -12,11 +12,10 @@ export interface TodoType {
   userId: string;
 }
 
-const Todo = () => {  
+const Todo = () => {
   const navigate = useNavigate();
   const [todos, setTodos] = useState([] as TodoType[]);
   // const [inputValue, setInputValue] = useState('');
-
 
   useEffect(() => {
     if (!localStorage.getItem('access_token')) navigate('/');
@@ -53,7 +52,7 @@ const Todo = () => {
       </button>
     </Container>
   );
-}
+};
 
 export default Todo;
 
@@ -65,5 +64,3 @@ const Container = styled.div`
     margin: 5px;
   }
 `;
-
-

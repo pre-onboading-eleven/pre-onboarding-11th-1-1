@@ -3,7 +3,7 @@ import React from 'react';
 // import { apis } from './apis/api';
 import { TodoType } from '../pages/todo/Todo';
 
-const TodoList = ({ todo }: {todo: TodoType}) => {
+const TodoList = ({ todo }: { todo: TodoType }) => {
   console.log(todo);
   // const [updateValue, setUpdateValue] = useState('');
   // const [isUpdate, setIsUpdate] = useState(false);
@@ -90,7 +90,7 @@ const TodoList = ({ todo }: {todo: TodoType}) => {
   );
 };
 
-export default TodoList
+export default TodoList;
 
 // const Completed = styled.span`
 //   display: inline-block;
