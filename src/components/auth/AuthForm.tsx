@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios';
 import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import { apis } from '../../apis/api';
 import Field from './AuthField';
 
@@ -81,20 +82,88 @@ function AuthForm({ type }: AuthFormProps) {
   }, [navigate]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>{authInfo.title}</h1>
+    <AuthFrom onSubmit={handleSubmit}>
+      <AuthTitle>{authInfo.title}</AuthTitle>
       {fields.map(field => (
         <Field key={field.name} wasSubmitted={wasSubmitted} setValid={setValid} {...field} />
       ))}
-      <p>
+      <AuthP>
         {authInfo.toLinkMessage}
         <Link to={authInfo.toLink}>
-          <button type="button">{authInfo.toLinkButton}</button>
+          <LinkButton type="button">{authInfo.toLinkButton}</LinkButton>
         </Link>
-      </p>
-      <button disabled={!disabled}>{authInfo.title}</button>
-    </form>
+      </AuthP>
+      <AuthButton disabled={!disabled}>{authInfo.title}</AuthButton>
+    </AuthFrom>
   );
 }
+
+const AuthFrom = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 350px;
+  height: 350px;
+  position: relative;
+  background-color: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin: 10px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
+  color: #003049;
+`;
+
+const AuthTitle = styled.h1`
+  text-align: center;
+  color: #003049;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #003049;
+`;
+
+const AuthP = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  padding: 10px 0;
+  margin: 0;
+`;
+
+const LinkButton = styled.button`
+  background: #003049;
+  color: #ffffff;
+  border-radius: 10px;
+  border: none;
+  padding: 5px 15px;
+  margin-left: 10px;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.4);
+  }
+`;
+
+const AuthButton = styled.button`
+  background: #fdf0d5;
+  color: #003049;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  padding: 5px 15px;
+  margin-left: 10px;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.4);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background: #d2d2d2;
+    color: white;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+`;
 
 export default AuthForm;
