@@ -152,7 +152,10 @@ TypeScript, React, Styled-Components, axios, react-router
 
 #### Notion
 
-[노션 링크](https://www.notion.so/8-11-1-6a4f1765336246d59ec75d383790b981)
+[11팀 노션 링크](https://www.notion.so/8-11-1-6a4f1765336246d59ec75d383790b981)
+
+![7-팀노션](https://user-images.githubusercontent.com/107922059/209205791-2bf3a1b3-2479-4d7a-8773-a1b411e618d8.gif)
+
 
 #### Discord
 
@@ -178,6 +181,8 @@ TypeScript, React, Styled-Components, axios, react-router
 - 비밀번호 조건 : 8자 이상
 - 입력된 이메일과 비밀번호가 위 조건을 만족할 때만 버튼이 활성화 되도록
 
+![1-회원가입](https://user-images.githubusercontent.com/107922059/209198460-a4577825-c484-4400-a181-b6ad70b3aeea.gif)
+
 **_ Best Practice 선정 이유 _**
 
 ```
@@ -193,12 +198,17 @@ Best Practice로 선정했습니다.
 - 로그인 API는 로그인이 성공했을 시 Response Body에 JWT를 포함해서 응답합니다.
 - 응답 받은 JWT는 로컬 스토리지에 저장해주세요
 
+![2-로그인](https://user-images.githubusercontent.com/107922059/209198480-5eb966bd-c607-4e12-bca8-e8559074ab41.gif)
+
+
 #### ✅ Assignment3
 
 로그인 여부에 따른 리다이렉트 처리를 구현해주세요
 
 - 로컬 스토리지에 토큰이 있는 상태로 `/` 페이지에 접속한다면 `/todo` 경로로 리다이렉트 시켜주세요
 - 로컬 스토리지에 토큰이 없는 상태로 `/todo` 페이지에 접속한다면 `/` 경로로 리다이렉트 시켜주세요
+
+![3-리다이렉트](https://user-images.githubusercontent.com/107922059/209198498-723d2804-cfec-4aa3-aca2-fffa4cd7dff4.gif)
 
 **_ Best Practice 선정 이유 _**
 
@@ -214,6 +224,8 @@ Best Practice로 선정했습니다.
 
 - `/todo`경로에 접속하면 투두 리스트의 목록을 볼 수 있도록 해주세요
 - 리스트 페이지에는 투두 리스트의 내용과 완료 여부가 표시되어야 합니다.
+
+![6-투두리스트 완료](https://user-images.githubusercontent.com/107922059/209204036-600eb38f-ce7b-47da-b02d-ef8264d4a29e.gif)
 
 **_ Best Practice 선정 이유 _**
 
@@ -231,6 +243,8 @@ todoList에 변동이 있을 때(추가, 수정, 삭제) 마다 getTodo API를 �
 ```
 
 - 리스트 페이지에는 입력창과 추가 버튼이 있고, 추가 버튼을 누르면 입력창의 내용이 새로운 투두 리스트로 추가되도록 해주세요
+
+![4-투두추가](https://user-images.githubusercontent.com/107922059/209202294-398a397c-f7ea-48c6-aa5b-272516e0e6d8.gif)
 
 **_ Best Practice 선정 이유 _**
 
@@ -250,6 +264,9 @@ API를 호출하지 않고 프론트단에서 기존 todoList 배열에서 creat
 - 투두 리스트의 개별 아이템 우측에 수정버튼이 존재하고 해당 버튼을 누르면 수정모드가 활성화되고 투두 리스트의 내용을 수정할 수 있도록 해주세요
 - 수정모드에서는 개별 아이템의 우측에 제출버튼과 취소버튼이 표시되며 해당 버튼을 통해서 수정 내용을 제출하거나 수정을 취소할 수 있도록 해주세요
 
+![5-투두수정](https://user-images.githubusercontent.com/107922059/209198528-56199095-9456-41db-8755-db62cd34aad1.gif)
+
+
 **_ Best Practice 선정 이유 _**
 
 ```
@@ -265,6 +282,8 @@ API를 호출하지 않고 프론트단에서 기존 todoList 배열에서 creat
 ```
 
 - 투두 리스트의 개별 아이템 우측에 삭제버튼이 존재하고 해당 버튼을 누르면 투두 리스트가 삭제되도록 해주세요
+
+![5-투두삭제](https://user-images.githubusercontent.com/107922059/209198540-cd7d0adb-bc04-4ff8-84b5-d6df9870bcf8.gif)
 
 **_ Best Practice 선정 이유 _**
 
