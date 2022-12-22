@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { apis } from '../apis/api';
 
 interface TodoListItemProps {
-  getTodo: () => void;
+  getTodo(): Promise<void>;
 }
 
 const TodoCreate = ({ getTodo }: TodoListItemProps) => {
@@ -15,8 +15,9 @@ const TodoCreate = ({ getTodo }: TodoListItemProps) => {
   const createTodo = async () => {
     try {
       await apis.createTodo({
-        todo: todoInput,
+        todo: todoInput.trim(),
       });
+
       getTodo();
       setTodoInput('');
     } catch (error) {
@@ -24,11 +25,17 @@ const TodoCreate = ({ getTodo }: TodoListItemProps) => {
     }
   };
 
+  const onCreateTodo = () => {
+    return () => {
+      createTodo();
+    };
+  };
+
   return (
     <div>
       <label htmlFor="create">추가</label>
       <input type="text" name="create" value={todoInput} onChange={onCreateInput} />
-      <button type="button" onClick={createTodo}>
+      <button type="button" onClick={onCreateTodo()}>
         추가
       </button>
     </div>

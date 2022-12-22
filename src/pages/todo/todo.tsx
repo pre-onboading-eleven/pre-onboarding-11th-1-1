@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { apis } from '../../apis/api';
@@ -22,6 +22,11 @@ const Todo = () => {
     setTodos(data);
   };
 
+  const onClickLogoutButton = () => {
+    localStorage.removeItem('access_token');
+    navigate('/');
+  };
+
   useEffect(() => {
     if (!localStorage.getItem('access_token')) navigate('/');
 
@@ -38,17 +43,13 @@ const Todo = () => {
     <Container>
       <TodoCreate getTodo={getTodo} />
       <ol>
-        {todos.length > 0 &&
-          todos.map(todo => <TodoList key={todo.id} todo={todo} getTodo={getTodo} />).reverse()}
+        {todos.length === 0 ? (
+          <strong>Todo 리스트가 비어 있습니다.</strong>
+        ) : (
+          todos.map(todo => <TodoList key={todo.id} todo={todo} getTodo={getTodo} />).reverse()
+        )}
       </ol>
-      <button
-        onClick={() => {
-          localStorage.removeItem('access_token');
-          navigate('/');
-        }}
-      >
-        로그아웃
-      </button>
+      <button onClick={onClickLogoutButton}>로그아웃</button>
     </Container>
   );
 };

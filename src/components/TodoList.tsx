@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-// import styled from 'styled-components';
+
 import { apis } from '../apis/api';
-import { TodoType } from '../pages/todo/Todo';
+import { TodoType } from '../pages/todo/todo';
 
 interface TodoListItemProps {
   todo: TodoType;
-  getTodo: () => void;
+  getTodo(): Promise<void>;
 }
 
 const TodoList = ({ todo, getTodo }: TodoListItemProps) => {
@@ -31,17 +31,11 @@ const TodoList = ({ todo, getTodo }: TodoListItemProps) => {
   };
 
   const onUpdateMode = () => {
-    setReadOnly(!readOnly);
-    setDisabled(!disabled);
+    setReadOnly(prevState => !prevState);
+    setDisabled(prevState => !prevState);
   };
 
-  const updateTodo = async (
-    e: React.SyntheticEvent,
-    id: number,
-    todo: string,
-    isCompleted: boolean
-  ) => {
-    e.preventDefault();
+  const updateTodo = async (id: number, todo: string, isCompleted: boolean) => {
     if (!todo) return alert('수정할 내용을 입력하세요');
 
     try {
@@ -49,11 +43,21 @@ const TodoList = ({ todo, getTodo }: TodoListItemProps) => {
         todo,
         isCompleted,
       });
+
       getTodo();
-      setReadOnly(!readOnly);
+      setReadOnly(true);
+      setDisabled(true);
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const onUpdatedTodo = (id: number, todo: string, isCompleted: boolean) => {
+    return (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+
+      updateTodo(id, todo, isCompleted);
+    };
   };
 
   const deleteTodo = async (id: number) => {
@@ -65,11 +69,17 @@ const TodoList = ({ todo, getTodo }: TodoListItemProps) => {
     }
   };
 
-  const cancelTodo = () => {
+  const onDeletedTodo = (id: number) => {
+    return () => {
+      deleteTodo(id);
+    };
+  };
+
+  const onCancelTodo = () => {
     setTodoText(todo.todo);
     setIsCompleted(todo.isCompleted);
-    setReadOnly(!readOnly);
-    setDisabled(!disabled);
+    setReadOnly(true);
+    setDisabled(true);
   };
 
   return (
@@ -83,11 +93,11 @@ const TodoList = ({ todo, getTodo }: TodoListItemProps) => {
       <label htmlFor={'checkbox' + todo.id}></label>
       <form>
         <input type="text" value={todoText} readOnly={readOnly} onChange={onUpdateText}></input>
-        <button onClick={e => updateTodo(e, todo.id, todoText, isCompleted)}>완료</button>
+        {!disabled && <button onClick={onUpdatedTodo(todo.id, todoText, isCompleted)}>완료</button>}
       </form>
-      <button onClick={onUpdateMode}>수정</button>
-      <button onClick={() => deleteTodo(todo.id)}>삭제</button>
-      <button onClick={cancelTodo}>취소</button>
+      {disabled && <button onClick={onUpdateMode}>수정</button>}
+      {disabled && <button onClick={onDeletedTodo(todo.id)}>삭제</button>}
+      {!disabled && <button onClick={onCancelTodo}>취소</button>}
     </div>
   );
 };
