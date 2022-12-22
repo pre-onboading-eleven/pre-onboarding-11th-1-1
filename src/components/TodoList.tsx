@@ -85,8 +85,9 @@ const TodoList = ({ todo, getTodo }: TodoListItemProps) => {
   //   setShowUpdateBtn(true);
   // };
 
-  const deleteTodo = (id:number) => {
-    apis.deleteTodo(id)
+  const deleteTodo = (id: number) => {
+    apis
+      .deleteTodo(id)
       .then(res => {
         if (res.status === 204) {
           getTodo();

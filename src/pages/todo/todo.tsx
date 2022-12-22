@@ -47,7 +47,7 @@ const Todo = () => {
   const getTodo = async () => {
     const { data } = await apis.getTodos();
     setTodos(data);
-  }
+  };
 
   useEffect(() => {
     if (!localStorage.getItem('access_token')) navigate('/');
@@ -71,7 +71,8 @@ const Todo = () => {
         </button>
       </div> */}
       <ol>
-        {todos.length > 0 && todos.map((todo) => <TodoList key={todo.id} todo={todo} getTodo={getTodo} />)}
+        {todos.length > 0 &&
+          todos.map(todo => <TodoList key={todo.id} todo={todo} getTodo={getTodo} />)}
       </ol>
       <button
         onClick={() => {
