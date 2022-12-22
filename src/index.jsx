@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-// import './index.css';
 import UserAuth from './UserAuth';
-import Todo from './Todo';
+import Todo from './pages/todo/Todo';
 
 const router = createBrowserRouter([
   {

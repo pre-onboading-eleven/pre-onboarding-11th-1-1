@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { apis } from './apis/api';
 import api from './api';
 
 const Container = styled.div`
@@ -32,26 +33,16 @@ function Todo() {
   const [updateIdx, setUpdateIdx] = useState(null);
 
   useEffect(() => {
-    fetch(api.getTodos(), {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: AUTHORIZATION,
-      },
-    })
-      .then(res => res.json())
-      .then(data => {
-        // console.log(data);
+    if (!localStorage.getItem('access_token')) navigate('/');
+
+    (async () => {
+      try {
+        const { data } = await apis.getTodos();
         setTodos(data);
-      });
-  }, []);
-
-  useEffect(() => {
-    const checkJwt = localStorage.getItem('access_token');
-
-    if (checkJwt === null) {
-      navigate('/');
-    }
+      } catch (error) {
+        console.error(error);
+      }
+    })();
   }, [navigate]);
 
   function handleInput(e) {
