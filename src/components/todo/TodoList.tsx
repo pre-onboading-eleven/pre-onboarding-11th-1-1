@@ -5,7 +5,7 @@ import Button from '../common/Button';
 import InputField from '../common/InputField';
 
 import { apis } from '../../apis/api';
-import { TodoType } from '../../pages/todo/todo';
+import { TodoType } from '../../pages/todo/Todo';
 
 interface TodoListItemProps {
   todo: TodoType;

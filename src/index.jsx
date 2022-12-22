@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Signin from './pages/auth/Signin';
 import Signup from './pages/auth/Signup';
-import Todo from './pages/todo/todo';
+import Todo from './pages/todo/Todo';
 
 const router = createBrowserRouter([
   {
