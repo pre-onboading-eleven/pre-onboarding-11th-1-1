@@ -35,11 +35,15 @@ const TodoList = ({ todo, getTodo }: TodoListItemProps) => {
     setDisabled(!disabled);
   };
 
-  const updateTodo = async (e: React.SyntheticEvent, id: number, todo: string, isCompleted: boolean) => {
+  const updateTodo = async (
+    e: React.SyntheticEvent,
+    id: number,
+    todo: string,
+    isCompleted: boolean
+  ) => {
     e.preventDefault();
     if (!todo) return alert('수정할 내용을 입력하세요');
 
-    
     try {
       await apis.updateTodo(id, {
         todo,
@@ -78,12 +82,7 @@ const TodoList = ({ todo, getTodo }: TodoListItemProps) => {
       ></input>
       <label htmlFor={'checkbox' + todo.id}></label>
       <form>
-        <input
-          type="text"
-          value={todoText}
-          readOnly={readOnly}
-          onChange={onUpdateText}
-        ></input>
+        <input type="text" value={todoText} readOnly={readOnly} onChange={onUpdateText}></input>
         <button onClick={e => updateTodo(e, todo.id, todoText, isCompleted)}>완료</button>
       </form>
       <button onClick={onUpdateMode}>수정</button>

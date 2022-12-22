@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from 'react';
 import { apis } from '../apis/api';
 
 interface TodoListItemProps {
@@ -8,9 +8,9 @@ interface TodoListItemProps {
 const TodoCreate = ({ getTodo }: TodoListItemProps) => {
   const [todoInput, setTodoInput] = useState('');
 
-    const onCreateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setTodoInput(e.target.value);
-    };
+  const onCreateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTodoInput(e.target.value);
+  };
 
   const createTodo = async () => {
     try {
