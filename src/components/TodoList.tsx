@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 // import styled from 'styled-components';
 import { apis } from '../apis/api';
 import { TodoType } from '../pages/todo/Todo';
@@ -9,81 +9,58 @@ interface TodoListItemProps {
 }
 
 const TodoList = ({ todo, getTodo }: TodoListItemProps) => {
-  console.log(todo);
-  // const [updateValue, setUpdateValue] = useState('');
-  // const [isUpdate, setIsUpdate] = useState(false);
-  // const [updateIdx, setUpdateIdx] = useState(null);
+  const [todoText, setTodoText] = useState(todo.todo);
+  const [isCompleted, setIsCompleted] = useState(todo.isCompleted);
+  const [readOnly, setReadOnly] = useState(true);
+  const [disabled, setDisabled] = useState(true);
+  const [, setShowDefaultBtn] = useState(true);
+  const [, setShowUpdateBtn] = useState(false);
 
-  // function handleDeleteTodo(serverId, arrayId) {
-  //   setIsUpdate(false);
 
-  //   fetch(api.deleteTodo(serverId), {
-  //     method: 'DELETE',
-  //     headers: {
-  //       Authorization: AUTHORIZATION,
-  //     },
-  //   }).then(res => {
-  //     // console.log(res);
-  //     if (res.status === 204) {
-  //       setTodos(todos.filter((item, idx) => idx !== arrayId));
-  //       alert('삭제 되었습니다');
-  //     } else {
-  //       alert('삭제 되지 않았습니다.');
-  //     }
-  //   });
-  // }
+  const onUpdateText = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTodoText(e.target.value);
+  };
 
-  // function handleUpdateValue(e, id) {
-  //   setUpdateValue(e.target.value);
-  // }
+  const onUpdateCheckBox = async () => {
+    setIsCompleted(prev => !prev);
+    try {
+      await apis.updateTodo(
+        todo.id,
+        {
+          todo: todoText,
+          isCompleted: !isCompleted,
+        },
+      );
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
-  // function handleUpdateTodo(serverId, arrayId, isCompleted) {
-  //   fetch(api.updateTodo(serverId), {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization: AUTHORIZATION,
-  //     },
-  //     body: JSON.stringify({
-  //       todo: updateValue.length === 0 ? todos[arrayId].todo : updateValue,
-  //       isCompleted: isCompleted,
-  //     }),
-  //   })
-  //     .then(res => {
-  //       if (res.status === 200) {
-  //         return res.json();
-  //       }
-  //     })
-  //     .then(data => {
-  //       setTodos(todos.map((item, idx) => (idx === arrayId ? data : item)));
-  //       setIsUpdate(false);
-  //       setUpdateValue('');
-  //     });
-  // }
+  const onUpdateMode = () => {
+    setReadOnly(!readOnly);
+    setDisabled(!disabled);
 
-  // const onChange = e => {
-  //   setValue(e.target.value);
-  // };
+    setShowDefaultBtn(false);
+    setShowUpdateBtn(true);
+  };
 
-  // const onKeyUp = () => {
-  //   const keyCode = window.event.keyCode;
+  const updateTodo = (e:any, id: number, todo: string, isCompleted: boolean) => {
+    e.preventDefault();
+    if (!todo) return alert('수정할 내용을 입력하세요');
 
-  //   if (keyCode === 13) {
-  //     updateTodo();
-  //   }
-  // };
-
-  // const checkboxStatus = e => {
-  //   setCompleted(e.target.checked);
-  // };
-
-  // const onUpdateMode = () => {
-  //   setReadOnly(!readOnly);
-  //   setDisabled(!disabled);
-
-  //   setShowDefaultBtn(false);
-  //   setShowUpdateBtn(true);
-  // };
+    apis.updateTodo(id, {
+        todo,
+        isCompleted,
+      })
+      .then(res => {
+        if (res.status === 200) {
+          getTodo();
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
 
   const deleteTodo = (id: number) => {
     apis
@@ -98,49 +75,37 @@ const TodoList = ({ todo, getTodo }: TodoListItemProps) => {
       });
   };
 
-  // const updateTodo = () => {
-  //   if (value === '') {
-  //     alert('수정할 내용을 입력하세요');
-  //   } else {
-  //     onUpdateTodo(id, value, completed);
-  //     setReadOnly(!readOnly);
-  //     setDisabled(!disabled);
-  //     setShowDefaultBtn(true);
-  //     setShowUpdateBtn(false);
-  //   }
-  // };
-
-  // const cancleTodo = () => {
-  //   setValue(todo.todo);
-  //   setCompleted(todo.isCompleted);
-  //   setReadOnly(!readOnly);
-  //   setDisabled(!disabled);
-  //   setShowDefaultBtn(true);
-  //   setShowUpdateBtn(false);
-  // };
+  const cancelTodo = () => {
+    setTodoText(todo.todo);
+    setIsCompleted(todo.isCompleted);
+    setReadOnly(!readOnly);
+    setDisabled(!disabled);
+    setShowDefaultBtn(true);
+    setShowUpdateBtn(false);
+  };
 
   return (
     <div className="todoListItem">
       <input
         type="checkbox"
         id={'checkbox' + todo.id}
-        checked={todo.isCompleted}
-        // disabled={disabled}
-        // onChange={checkboxStatus}
+        defaultChecked={isCompleted}
+        onClick={onUpdateCheckBox}
       ></input>
       <label htmlFor={'checkbox' + todo.id}></label>
-      <input
-        // className={completed ? 'done' : ''}
-        type="text"
-        value={todo.todo}
-        // readOnly={readOnly}
-        // onChange={onChange}
-        // onKeyUp={onKeyUp}
-      ></input>
-      {/* <div onClick={onUpdateMode}>수정</div> */}
+      <form>
+        <input
+          // className={completed ? 'done' : ''}
+          type="text"
+          value={todoText}
+          readOnly={readOnly}
+          onChange={onUpdateText}
+        ></input>
+        <button onClick={e => updateTodo(e, todo.id, todoText, isCompleted)}>완료</button>
+      </form>
+      <button onClick={onUpdateMode}>수정</button>
       <button onClick={() => deleteTodo(todo.id)}>삭제</button>
-      {/* <div onClick={updateTodo}>완료</div>
-      <div onClick={cancleTodo}>취소</div> */}
+      <button onClick={cancelTodo}>취소</button>
     </div>
   );
 };
