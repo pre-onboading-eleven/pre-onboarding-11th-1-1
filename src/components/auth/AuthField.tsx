@@ -47,9 +47,9 @@ const Field = ({ name, label, type, wasSubmitted, setValid }: FieldProps) => {
 
   return (
     <Container>
-      <div>
-        <label htmlFor={name}>{label}</label>
-        <input
+      <InputContainer>
+        <AuthLabel htmlFor={name}>{label}</AuthLabel>
+        <AuthInput
           type={type}
           name={name}
           id={name}
@@ -57,13 +57,39 @@ const Field = ({ name, label, type, wasSubmitted, setValid }: FieldProps) => {
           onBlur={() => setTouched(true)}
           onChange={e => setValue(e.target.value)}
         />
-      </div>
+      </InputContainer>
 
-      {displayErrorMessage && <p>{displayErrorMessage}</p>}
+      {displayErrorMessage && <ErrorP>{displayErrorMessage}</ErrorP>}
     </Container>
   );
 };
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+  height: 60px;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const AuthLabel = styled.label`
+  width: 20%;
+`;
+
+const AuthInput = styled.input`
+  width: 80%;
+  height: 25px;
+`;
+
+const ErrorP = styled.p`
+  padding-left: 20%;
+  margin: 0;
+  margin-top: 10px;
+  color: #c1111f;
+`;
 
 export default Field;
