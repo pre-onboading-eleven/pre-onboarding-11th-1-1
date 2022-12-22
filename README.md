@@ -101,12 +101,6 @@ npm install
 npm start
 ```
 
-## ⚒️ 기술 스택 / 라이브러리
-
-```
-TypeScript, React, Styled-Components, axios, react-router
-```
-
 ## 🌲 src 폴더 구조
 
 ```
@@ -345,3 +339,47 @@ axios 인스턴스를 생성하여 api를 따로 분리시킨 코드를 best-pra
 - 로그아웃
 
     - 로그아웃 시 로컬스토리지에 있는 토큰을 지우고, 로그인화면으로 redirect합니다.
+
+## 📝 Commit message Convention & branch 전략
+
+- commit message
+    - **feat : 새로운 기능 추가**
+    - **fix : 버그 수정**
+    - **docs : 문서 수정**
+    - **style : 코드 formatting, 세미콜론(;) 누락, 코드 변경이 없는 경우**
+    - **refactor : 코드 리팩터링**
+    - **test : 테스트 코드, 리팩터링 테스트 코드 추가(프로덕션 코드 변경 X)**
+    - **chore : 빌드 업무 수정, 패키지 매니저 수정(프로덕션 코드 변경 X)**
+    - **design : CSS 등 사용자 UI 디자인 변경**
+    - **comment : 필요한 주석 추가 및 변경**
+    - **rename : 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우**
+    - **remove : 파일을 삭제하는 작업만 수행한 경우**
+    - **!BREAKING CHANGE : 커다란 API 변경의 경우**
+    - **!HOTFIX : 급하게 치명적인 버그를 고쳐야 하는 경우**
+    - 추가규칙
+        - 타입 : 제목
+        본문
+        꼬리말
+        - 본문과 꼬리말은 생략 가능하다(선택사항)
+        - 타입은 위 13가지로 한정한다
+        - 제목은 고유어를 제외하고 한글로 쓴다
+        - 타입의 첫글자는 소문자로 사용하고, 콜론 앞뒤로 한칸씩 띄운다
+
+- branch 전략
+    - `main`, `dev`, `feat` branch만 사용
+        - `main`: 배포 및 최종본, 출시 버전 브랜치
+        - `dev`: 개발용 브랜치
+        - `feat/` : 세부기능 개발용 브랜치
+            - feat/auth
+            - feat/todo
+            - feat/docs
+        - `design/` : 스타일링 브랜치 
+            - design/auth
+            - design/todo
+
+
+## ⚒️ 기술 스택 / 라이브러리
+
+```
+TypeScript, React, Styled-Components, axios, react-router
+```
