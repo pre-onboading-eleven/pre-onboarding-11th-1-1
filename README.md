@@ -155,11 +155,11 @@ style관련 파일을 따로 분류하는 것에 대한 논의가 있었는데, 
 
 <img src="https://user-images.githubusercontent.com/101863209/209189391-4f568359-6d3a-4e17-b208-42ab6d0151f2.png" width="600" height="350">
 
-#### Live Coding
+#### Live Share
 
 <img src="https://user-images.githubusercontent.com/101863209/209188748-bee8683d-09f0-4021-80da-cc8d803f9ad0.jpeg" width="600" height="350">
 
-#### Live Share
+#### Live Coding
 
 <img src="https://user-images.githubusercontent.com/101863209/209188831-f6a07095-4f7d-4123-90a7-617bbcdbdce1.jpeg" width="600" height="350">
 
