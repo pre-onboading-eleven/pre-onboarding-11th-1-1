@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 // import styled from 'styled-components';
 import { apis } from '../apis/api';
 import { TodoType } from '../pages/todo/Todo';
@@ -16,7 +16,6 @@ const TodoList = ({ todo, getTodo }: TodoListItemProps) => {
   const [, setShowDefaultBtn] = useState(true);
   const [, setShowUpdateBtn] = useState(false);
 
-
   const onUpdateText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodoText(e.target.value);
   };
@@ -24,13 +23,10 @@ const TodoList = ({ todo, getTodo }: TodoListItemProps) => {
   const onUpdateCheckBox = async () => {
     setIsCompleted(prev => !prev);
     try {
-      await apis.updateTodo(
-        todo.id,
-        {
-          todo: todoText,
-          isCompleted: !isCompleted,
-        },
-      );
+      await apis.updateTodo(todo.id, {
+        todo: todoText,
+        isCompleted: !isCompleted,
+      });
     } catch (e) {
       console.error(e);
     }
@@ -44,11 +40,12 @@ const TodoList = ({ todo, getTodo }: TodoListItemProps) => {
     setShowUpdateBtn(true);
   };
 
-  const updateTodo = (e:any, id: number, todo: string, isCompleted: boolean) => {
+  const updateTodo = (e: any, id: number, todo: string, isCompleted: boolean) => {
     e.preventDefault();
     if (!todo) return alert('수정할 내용을 입력하세요');
 
-    apis.updateTodo(id, {
+    apis
+      .updateTodo(id, {
         todo,
         isCompleted,
       })
