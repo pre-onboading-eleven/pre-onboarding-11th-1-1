@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Auth from './pages/auth/auth';
-import Todo from './pages/todo/todo';
+import Auth from './pages/auth/Signin';
+import Todo from './pages/todo/Todo';
 
 function Router() {
   return (
