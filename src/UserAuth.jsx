@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-// import api from './api';
-
-import { apis } from './apis/api';
+import api from './api';
 
 const Container = styled.div`
   display: flex;
@@ -48,7 +46,7 @@ function UserAuth() {
   }
 
   // fetch
-  async function handleUserAuth(e) {
+  function handleUserAuth(e) {
     e.preventDefault();
 
     const data = {
@@ -57,12 +55,8 @@ function UserAuth() {
     };
     // console.log(data);
 
-    // 테스트 완료
-    // const res = await apis.postSignIn(data);
-    // console.log(res);
-
     // fetch
-    fetch(isSignin ? apis.signin() : apis.postSignUp(), {
+    fetch(isSignin ? api.signin() : api.signup(), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

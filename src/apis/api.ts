@@ -16,7 +16,7 @@ const authAPI = () => {
 const interceptors = (api: AxiosInstance) => {
   api.interceptors.request.use(
     config => {
-      const token = localStorage.getItem('userJWT');
+      const token = localStorage.getItem('access_token');
 
       config.headers = {
         authorization: token ? `bearer ${token}` : null,
