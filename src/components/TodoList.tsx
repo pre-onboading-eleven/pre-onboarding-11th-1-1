@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 
 import { apis } from '../apis/api';
 import { TodoType } from '../pages/todo/Todo';
@@ -9,10 +9,10 @@ interface TodoListItemProps {
 }
 
 const TodoList = ({ todo, getTodo }: TodoListItemProps) => {
-  const [todoText, setTodoText] = useState(todo.todo);
-  const [isCompleted, setIsCompleted] = useState(todo.isCompleted);
-  const [readOnly, setReadOnly] = useState(true);
-  const [disabled, setDisabled] = useState(true);
+  const [todoText, setTodoText] = React.useState(todo.todo);
+  const [isCompleted, setIsCompleted] = React.useState(todo.isCompleted);
+  const [readOnly, setReadOnly] = React.useState(true);
+  const [disabled, setDisabled] = React.useState(true);
 
   const onUpdateText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodoText(e.target.value);
