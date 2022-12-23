@@ -41,8 +41,8 @@ const Field = ({ name, label, type, wasSubmitted, setValid }: FieldProps) => {
   const displayErrorMessage = (wasSubmitted || touched) && errorMessage;
 
   React.useEffect(() => {
-    if (displayErrorMessage) setValid(prev => ({ ...prev, [name]: false }));
-    else setValid(prev => ({ ...prev, [name]: true }));
+    if (displayErrorMessage === null) setValid(prev => ({ ...prev, [name]: true }));
+    else setValid(prev => ({ ...prev, [name]: false }));
   }, [displayErrorMessage, name, setValid]);
 
   return (
@@ -54,7 +54,7 @@ const Field = ({ name, label, type, wasSubmitted, setValid }: FieldProps) => {
           name={name}
           id={name}
           value={value}
-          onBlur={() => setTouched(true)}
+          onFocus={() => setTouched(true)}
           onChange={e => setValue(e.target.value)}
         />
       </InputContainer>

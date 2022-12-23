@@ -64,6 +64,7 @@ function AuthForm({ type }: AuthFormProps) {
       const response = await authApiCallback(fieldValues);
 
       if (response.data) {
+        alert(`${authInfo.title}에 성공했습니다.`);
         window.localStorage.setItem('access_token', response.data.access_token);
         setSuccess(true);
       }
