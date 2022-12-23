@@ -81,7 +81,7 @@ const TodoList = ({ todo, getTodo }: TodoListItemProps) => {
 
   const onCancelTodo = () => {
     setTodoText(todo.todo);
-    setIsCompleted(todo.isCompleted);
+    // setIsCompleted(todo.isCompleted);
     setReadOnly(true);
     setDisabled(true);
   };
@@ -96,7 +96,7 @@ const TodoList = ({ todo, getTodo }: TodoListItemProps) => {
           onClick={onUpdateCheckBox}
         />
         <label htmlFor={'checkbox' + todo.id}>
-          <strong>{isCompleted ? '' : '미완료'}</strong>
+          <strong>{isCompleted ? '완료' : ''}</strong>
         </label>
       </div>
       <div className="todoInput">
